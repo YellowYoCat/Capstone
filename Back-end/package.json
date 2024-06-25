@@ -1,0 +1,16 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Back-end.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon Back-end.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Capstone"
+  },
+  "author": "Johanna Johnson",
+  "license": "ISC"
+}
