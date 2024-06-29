@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Poetsen+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.raleway {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.poetsen-one-regular {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  
+.Banner {
+    display: flex;
+    justify-content: center;
+    align-items: inherit;
+    margin: 10px 0; 
+    padding-left: 55px;
+    padding-right: 55px;
+  }
+  
+  .Banner img {
+    width: 100%; 
+    max-width: 1700px; 
+    height: inherit; 
+    border-radius: 55px;
+    border: 2px solid black; 
+   
+  }
+
+  .Dokimerch{
+    font-family: "Poetsen One", sans-serif;
+    font-size: 55px;
+    padding-top: 20px;
+    position: absolute;
+    justify-content: center;
+    
+  }
+
+  .cta{
+    font-family: "Raleway", sans-serif;
+    padding: 10px 10px 10px 25px;
+ 
+
+  }
+
+  .call{
+    border: solid 5px black;
+    /* margin: 15px 25px 15px 25px; */
+    background: #B8D0EB;
+    border-radius: 15px;
+    margin-left: 65px;
+    margin-right: 65px;
+    
+    
+    
+  }
+  
