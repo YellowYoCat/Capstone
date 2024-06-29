@@ -29,8 +29,8 @@
     max-width: 1700px; 
     height: inherit; 
     border-radius: 55px;
-    border: 2px solid black; 
-   
+    border: 5px solid #6F2DBD; 
+    
   }
 
   .Dokimerch{
@@ -39,20 +39,21 @@
     padding-top: 20px;
     position: absolute;
     justify-content: center;
-    
+    color: #6F2DBD;
+    -webkit-text-stroke: 3px black;
   }
 
   .cta{
     font-family: "Raleway", sans-serif;
     padding: 10px 10px 10px 25px;
- 
+    color: #6F2DBD;
+    
 
   }
 
   .call{
-    border: solid 5px black;
-    /* margin: 15px 25px 15px 25px; */
-    background: #B8D0EB;
+    border: solid 5px #6F2DBD;
+    background: #B9FAF8;
     border-radius: 15px;
     margin-left: 65px;
     margin-right: 65px;

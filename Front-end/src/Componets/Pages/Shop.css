@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Poetsen+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap');
+
+.raleway {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.poetsen-one-regular {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.fuzzy-bubbles-regular {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.fuzzy-bubbles-bold {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+
+.banner {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    font-weight: 700;
+    font-size: xxx-large;
+    display: flex;
+    justify-content: center;
+    align-items: inherit;
+    margin: 10px 0;
+    border: solid 10px #6F2DBD;
+    -webkit-text-stroke: 4px black;
+    background: #B9FAF8;
+    border-radius: 25px;
+    margin-left: 65px;
+    margin-right: 65px;
+    padding: 10px;
+}
+
+.AP{
+    color: #6F2DBD;
+}

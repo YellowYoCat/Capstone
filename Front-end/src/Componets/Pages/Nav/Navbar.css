@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: center;
   border: 3px solid #B9FAF8;
+  
   margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
@@ -44,6 +45,7 @@
   font-weight: 800;
   text-decoration: none;
   color: #B9FAF8;
+  -webkit-text-stroke: 1.8px black;
   position: relative;
   z-index: 1;
   transition: background-color 0.3s, color 0.3s;
