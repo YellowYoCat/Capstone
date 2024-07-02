@@ -1,16 +1,15 @@
 import React from 'react'
 
-const ProductDetail = ({products, closeClicked}) => {
-  return (
-    <div className='detail'>
-        <button onClick={() => (closeClicked())}>Close</button>
-        <img src={products.image} alt={products.title}/>
-        <h2>{products.title}</h2>
-        <p>{products.price}</p>
-        <p>{products.description}</p>
-        <p>{products.category}</p>
-    </div>
-  )
+
+const ProductDetail = ({product}) => {
+    return (
+        <div className="product-item">
+        <img src={product.image} alt={product.title} />
+        <h2>{product.title}</h2>
+        <p>{product.description}</p>
+        <p><strong>${product.price}</strong></p>
+      </div>
+    )
 }
 
 export default ProductDetail

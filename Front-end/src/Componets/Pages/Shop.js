@@ -79,13 +79,6 @@ const Shop = () => {
         .catch(error => console.error('Error fetching data:', error));
 }, []);
 
-  // useEffect(() => {
-  //   fetch('https://fakestoreapi.com/products')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setProducts(data);
-  //     });
-  // }, []);
 
   return (
     <div>

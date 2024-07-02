@@ -1,44 +1,38 @@
 // import React from 'react'
+import { useState, useEffect } from "react";
+import ProductDetail from "./ProductDetail";
 
-// export const ProductList = ({productData, productClicked}) => {
-//   return (
-//     <div className='list'>
-//         {productData.map((product) => (
-//             <div key={product.image} className='pImg' onClick={() => productClicked(product)}> 
-//             <img src={product.image} alt={product.title} />
-//             <p>{product.title}</p>
-//             <p>{product.price}</p>
-//             <p>{product.description}</p>
-//             </div>
-//         ))}
-        
-//     </div>
-//   )
-// }
-
-// export default ProductList
-
-
-import React from 'react'
-
-export const ProductList = ({productData, productClicked}) => {
-  // Guard clause to handle undefined productData
-  if (!productData || !Array.isArray(productData) || productData.length === 0) {
-    return <div className='list'>No products available</div>;
-  }
-
-  return (
-    <div className='list'>
-        {productData.map((product) => (
-            <div key={product.image} className='pImg' onClick={() => productClicked(product)}> 
-              <img src={product.image} alt={product.title} />
-              <p>{product.title}</p>
-              <p>{product.price}</p>
-              <p>{product.description}</p>
-            </div>
+const ProductList = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const fetchProducts = async () => {
+        try {
+          const response = await fetch('https://fakestoreapi.com/products');
+          const data = await response.json();
+          setProducts(data);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching products', error);
+          setLoading(false);
+        }
+      };
+  
+      fetchProducts();
+    }, []);
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    return (
+      <div className="product-list">
+        {products.map(product => (
+          <ProductDetail key={product.id} product={product} />
         ))}
-    </div>
-  )
-}
-
-export default ProductList;
+      </div>
+    );
+  };
+  
+  export default ProductList;
