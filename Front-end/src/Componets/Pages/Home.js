@@ -10,7 +10,7 @@ const Home = () => {
       </div>
       <div className='Banner'>
         <img src='banner.png' />
-        <div class="Dokimerch">
+        <div className="Dokimerch">
           DOKIMERCH
         </div>
       </div>

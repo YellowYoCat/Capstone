@@ -1,29 +1,91 @@
-import React from 'react'
+// import React from 'react'
+// import Navbar from './Nav/Navbar';
+// import { useState, useEffect } from 'react';
+// import './Shop.css'
+// import ProductDetail from '../Product/ProductDetail';
+// import { ProductList } from '../Product/ProductList';
+
+// const Shop = () => {
+
+//   const [products, setProducts] = useState([]);
+//   const [selectedProduct, SetSelectedProduct] = useState(null);
+
+//   let productClicked = function (item){
+//     SetSelectedProduct(item)
+//   }
+
+//   let closeClicked = function () {
+//     SetSelectedProduct(undefined)
+//   }
+
+
+
+// useEffect(() => {
+//   fetch('https://fakestoreapi.com/products')
+//   .then(r => r.json())
+//   .then(data => {
+//     setProducts(data)
+//   });
+  
+// }, []);
+
+
+
+//   return (
+//     <div>
+//       <div>
+//         <Navbar />
+//       </div>
+//       <div className='banner'>
+//         <h1 className='AP'>ALL PRODUCTS</h1>
+
+
+//       </div>
+//       {
+//           selectedProduct ?
+//           <ProductDetail products={selectedProduct} closeClicked={closeClicked}/> :
+//           <ProductList  productClicked={productClicked}/> 
+//         }
+
+//     </div>
+
+//   )
+// }
+
+// export default Shop
+
+import React, { useState, useEffect } from 'react';
 import Navbar from './Nav/Navbar';
-import Commerce from '@chec/commerce.js'
-import { commerce } from '@chec/commerce.js'
-import { useState, useEffect } from 'react';
-import './Shop.css'
+import './Shop.css';
+import ProductDetail from '../Product/ProductDetail';
+import ProductList from '../Product/ProductList';
 
 const Shop = () => {
-  const commerce = new Commerce('pk_576186827786196c6606cd0287e2ae43938873da51144')
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-    useEffect(() => {
-        commerce.products.list()
-          .then(res => {
-            setProducts(res.data)
-          })
-          .catch(err => console.log(err))
-    },[])
-    
-    const fetchProducts = () => {
-      commerce.products.list().then((products) => {
-        setProducts(products.data);
-      }).catch((error) => {
-        console.log('There was an error fetching the products', error)
-      });
-    }
+  const productClicked = (products) => {
+    setSelectedProduct(products);
+  };
+
+  const closeClicked = () => {
+    setSelectedProduct(null);
+  };
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+        .then(res => res.json())
+        .then(json => setProducts(json))
+        .catch(error => console.error('Error fetching data:', error));
+}, []);
+
+  // useEffect(() => {
+  //   fetch('https://fakestoreapi.com/products')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setProducts(data);
+  //     });
+  // }, []);
 
   return (
     <div>
@@ -32,16 +94,16 @@ const Shop = () => {
       </div>
       <div className='banner'>
         <h1 className='AP'>ALL PRODUCTS</h1>
-
-      
       </div>
       <div>
-        
-      
+        {selectedProduct ? (
+          <ProductDetail product={selectedProduct} closeClicked={closeClicked} />
+        ) : (
+          <ProductList products={products} productClicked={productClicked} />
+        )}
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default Shop
+export default Shop;
