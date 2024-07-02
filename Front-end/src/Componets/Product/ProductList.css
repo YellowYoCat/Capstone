@@ -29,49 +29,53 @@
 }
 
 
-
-.banner {
+.product-list {
+    margin-left: 25px;
+    margin-right: 25px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 40px;
+  }
+  
+  .pBox {
+    border: 3px solid #6F2DBD;
+    border-radius: 10px;
+    background-color: #A663CC;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px #B8D0EB;
+    transition: transform 0.2s ease;
+  }
+  
+  .pBox:hover {
+    transform: translateY(-5px);
+  }
+  
+  .pImg {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .pTitle {
     font-family: "Fuzzy Bubbles", sans-serif;
     font-weight: 700;
-    font-size: xxx-large;
-    display: flex;
-    justify-content: center;
-    align-items: inherit;
-    margin: 10px 0;
-    border: solid 10px #6F2DBD;
-    -webkit-text-stroke: 4px black;
-    background: #B9FAF8;
-    border-radius: 25px;
-    margin-left: 65px;
-    margin-right: 65px;
-    padding: 10px;
-}
+    font-style: normal;
+    font-size: 1.2em;
+    /* margin: 10px 0; */
+    margin-left: 15px;
+    margin-right: 15px;
 
-.AP {
-    color: #6F2DBD;
-}
-
-@media (max-width: 1200px) {
-    .banner {
-        font-size: 5vw;
-    }
-}
-
-@media (max-width: 900px) {
-    .banner {
-        font-size: 4vw;
-    }
-}
-
-@media (max-width: 600px) {
-    .banner {
-        font-size: 3.5vw;
-    }
-}
-
-@media (max-width: 400px) {
-    .banner {
-        font-size: 3vw;
-        padding: 5%;
-    }
-}
+  }
+  
+  .pPrice {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1em;
+    color: #B8D0EB;
+    margin: 5px 0;
+  }
+  
+  

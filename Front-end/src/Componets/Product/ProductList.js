@@ -1,8 +1,8 @@
 // import React from 'react'
 import { useState, useEffect } from "react";
-import ProductDetail from "./ProductDetail";
+import './ProductList.css';
 
-const ProductList = () => {
+const ProductList = ({productData, productClicked}) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
   
@@ -25,14 +25,19 @@ const ProductList = () => {
     if (loading) {
       return <div>Loading...</div>;
     }
-  
+
     return (
-      <div className="product-list">
-        {products.map(product => (
-          <ProductDetail key={product.id} product={product} />
-        ))}
-      </div>
-    );
-  };
+        <div className='product-list'>
+          {products.map((product) => (
+            <div key={product.id} className='pBox' onClick={() => productClicked(product)}>
+              <img src={product.image} alt={product.title} className='pImg' />
+              <h2 className='pTitle'>{product.title}</h2>
+              <p className='pPrice'>${product.price}</p>
+            </div>
+          ))}
+        </div>
+      );
+    };
+  
   
   export default ProductList;
