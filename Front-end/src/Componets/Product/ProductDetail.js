@@ -1,25 +1,17 @@
-// import React from 'react'
-// import './ProductDetail.css';
-
-// const ProductDetail = ({product,  closeClicked}) => {
-//     return (
-//         <div className="product-item">
-//         <img src={product.image} alt={product.title} />
-//         <h2>{product.title}</h2>
-//         <p>{product.description}</p>
-//         <p><strong>${product.price}</strong></p>
-//         <button onClick={() => (closeClicked())}>close</button>
-//       </div>
-//     )
-// }
-
-// export default ProductDetail
-
 import React from 'react'
 import './ProductDetail.css';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
-const ProductDetail = ({ product, closeClicked, addToCartClicked }) => {
+const ProductDetail = ({ product, closeClicked}) => { // addToCartClicked 
+  const [cartItems, setCartItems] = useState([]);
+
+
+  function addToCartClicked(item) {
+    setCartItems(prev => [...prev, item]);
+  }
+
   return (
     <div className='container'>
       <div className="product-item">
@@ -28,7 +20,11 @@ const ProductDetail = ({ product, closeClicked, addToCartClicked }) => {
         <p>{product.description}</p>
         <p><strong>${product.price}</strong></p>
         <button onClick={() => (closeClicked())}>Close</button>
-        <button className="add-to-cart" onClick={() => (addToCartClicked(product))}>Add to Cart</button>
+        <Link to="/cart">
+        <button className="addToCart" onClick={() => addToCartClicked(product.id)}> Add to Cart</button>
+
+        </Link>
+        
       </div>
 
     </div>
@@ -37,3 +33,4 @@ const ProductDetail = ({ product, closeClicked, addToCartClicked }) => {
 }
 
 export default ProductDetail;
+
