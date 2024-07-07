@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap');
+
+.fuzzy-bubbles-bold {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+.social-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .social-title {
+    font-size: 50px;
+    font-family: "Fuzzy Bubbles", sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  .phone {
+    margin-top: 45px;
+    width: 300px;
+    height: 500px;
+    border: 5px solid #6F2DBD;
+    background-color: #A663CC;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .phone::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    width: 60px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #B9FAF8;
+  }
+  
+  .icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .icon {
+    width: 100px;
+    height: 100px;
+  }
+  

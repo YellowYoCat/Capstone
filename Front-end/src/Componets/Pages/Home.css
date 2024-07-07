@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
-
+ @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Poetsen+One&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 .raleway {
@@ -9,56 +8,92 @@
 }
 
 .poetsen-one-regular {
-    font-family: "Poetsen One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  
 .Banner {
-    display: flex;
-    justify-content: center;
-    align-items: inherit;
-    margin: 10px 0; 
-    padding-left: 55px;
-    padding-right: 55px;
-  }
-  
-  .Banner img {
-    width: 100%; 
-    max-width: 1700px; 
-    height: inherit; 
-    border-radius: 55px;
-    border: 5px solid #6F2DBD; 
-    
+  display: flex;
+  justify-content: center;
+  align-items: inherit;
+  margin: 10px 0;
+  padding-left: 55px;
+  padding-right: 55px;
+}
+
+.Banner img {
+  width: 100%;
+  max-width: 1700px;
+  height: inherit;
+  border-radius: 55px;
+  border: 5px solid #6F2DBD;
+}
+
+.Dokimerch {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 55px;
+  padding-top: 20px;
+  position: absolute;
+  justify-content: center;
+  color: #6F2DBD;
+  -webkit-text-stroke: 3px black;
+}
+
+.cta {
+  font-family: "Raleway", sans-serif;
+  padding: 10px 10px 10px 25px;
+  color: #6F2DBD;
+}
+
+.call {
+  border: solid 5px #6F2DBD;
+  background: #B9FAF8;
+  border-radius: 15px;
+  margin-left: 65px;
+  margin-right: 65px;
+}
+
+/* Responsive navigation */
+@media screen and (max-width: 768px) {
+  .Banner {
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .Dokimerch{
-    font-family: "Poetsen One", sans-serif;
-    font-size: 55px;
-    padding-top: 20px;
-    position: absolute;
-    justify-content: center;
-    color: #6F2DBD;
-    -webkit-text-stroke: 3px black;
+  .Dokimerch {
+    font-size: 45px;
+    padding-top: 15px;
   }
 
-  .cta{
-    font-family: "Raleway", sans-serif;
-    padding: 10px 10px 10px 25px;
-    color: #6F2DBD;
-    
-
+  .call {
+    margin-left: 20px;
+    margin-right: 20px;
   }
 
-  .call{
-    border: solid 5px #6F2DBD;
-    background: #B9FAF8;
-    border-radius: 15px;
-    margin-left: 65px;
-    margin-right: 65px;
-    
-    
-    
+  .cta {
+    padding: 5px 5px 5px 10px;
   }
-  
+}
+
+@media screen and (max-width: 480px) {
+  .Banner {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .Dokimerch {
+    font-size: 35px;
+    padding-top: 10px;
+  }
+
+  .call {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .cta {
+    padding: 5px;
+  }
+}
