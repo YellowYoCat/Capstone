@@ -10,6 +10,8 @@ import Profile from './Componets/Pages/Profile';
 import Cart from './Componets/Pages/Cart';
 import Contact from './Componets/Pages/Contact';
 import Social from './Componets/Pages/Social';
+import Login from './Componets/Pages/Login';
+import Signup from './Componets/Pages/Signup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -35,8 +37,13 @@ const router = createBrowserRouter([{
 },
 {
   path: '/profile',
-  element: <Profile/>
+  element: <Login/>
 },
+{
+  path: '/signup',
+  element: <Signup/>
+}
+
 ])
 
 

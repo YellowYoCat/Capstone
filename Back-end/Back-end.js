@@ -1,18 +1,25 @@
-console.log("does this work?")
+
+const express = require('express');
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://Johanna:Jj3380@rest.4gkziko.mongodb.net/?retryWrites=true&w=majority&appName=rest";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const { DAL } = require('./DAL/mongo-dal');
+app.use(cors({ "origin": "*" }));
+const app = express();
+const port = 3000;
 
-async function run() {
-    try {
-        await client.connect();
-        console.log("Connected to MongoDB Atlas");
-        const database = client.db('Ecom');
-        const collection = database.collection('Data');
-        
-    } finally {
-        await client.close();
-    }
-}
 
-run().catch(console.dir);
+const url = "mongodb+srv://Johanna:Jj306879@rest.4gkziko.mongodb.net/?retryWrites=true&w=majority&appName=rest";
+const dbName = 'Ecom';
+
+app.get('/', (req, res) => {
+    res.send("you hit my route")
+  })
+
+ 
+  
+
+
+app.listen(port, (err) => {
+    if (err) console.log(err);
+    console.log(`Express is listening on ${port}`)
+  });
+  

@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap');
+
+.fuzzy-bubbles-bold {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+/* Login.css */
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.login-box {
+    background-color: #B9FAF8;
+    border: 4px solid #A663CC;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #6F2DBD;
+    text-align: center;
+    width: 600px;
+}
+
+.login-title {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    color: #6F2DBD;
+    -webkit-text-stroke: 3px black;
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-weight: 1500;
+    font-size: 100px;
+    
+}
+
+.login-label {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    color: #6F2DBD;
+    display: block;
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.login-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 3px solid #A663CC;
+}
+
+.signup-text {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    color: #6F2DBD;
+    /* font-weight: 900px; */
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-button, .signup-button {
+    font-family: "Fuzzy Bubbles", sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button {
+    background-color: #6F2DBD;
+    color: #B9FAF8;
+    box-shadow: 0 0 10px #6F2DBD;
+    border: 1px solid #A663CC;
+}
+
+.signup-button {
+    background-color: #6F2DBD;
+    color: #B9FAF8;
+    box-shadow: 0 0 10px #6F2DBD;
+    border: 1px solid #A663CC;
+}
+
+.signup-button:hover, .login-button:hover {
+    opacity: 0.8;
+}
