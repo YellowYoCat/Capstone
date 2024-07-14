@@ -12,6 +12,7 @@ import Contact from './Componets/Pages/Contact';
 import Social from './Componets/Pages/Social';
 import Login from './Componets/Pages/Login';
 import Signup from './Componets/Pages/Signup';
+import Checkout from './Componets/Pages/Checkout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([{
 {
   path: '/signup',
   element: <Signup/>
+},
+{
+  path: '/checkout',
+  element: <Checkout/>
 }
 
 ])
@@ -51,9 +56,6 @@ const router = createBrowserRouter([{
 root.render(
   <React.StrictMode>
     <RouterProvider router={router}/>
-    {/* <BrowserRouter>
-      <App />
-    </BrowserRouter> */}
     
   </React.StrictMode>
 );

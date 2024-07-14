@@ -49,7 +49,7 @@
     font-family: "Fuzzy Bubbles", sans-serif;
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #6F2DBD;
     color: white;
     border: none;
     border-radius: 5px;
@@ -57,8 +57,5 @@
     font-size: 16px;
   }
   
-  .register-button:hover {
-    
-    background-color: #45a049;
-  }
+ 
   
