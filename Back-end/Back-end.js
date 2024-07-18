@@ -4,7 +4,8 @@ const { MongoClient } = require('mongodb');
 const { DAL } = require('./DAL/mongo-dal');
 app.use(cors({ "origin": "*" }));
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000
+require('DB').config();
 
 
 const url = "mongodb+srv://Johanna:Jj306879@rest.4gkziko.mongodb.net/?retryWrites=true&w=majority&appName=rest";
@@ -14,6 +15,55 @@ app.get('/', (req, res) => {
     res.send("you hit my route")
   })
 
+  
+app.post('/profiles', async (req, res) => {
+    try {
+        const profile = req.body;
+        const result = await DAL.createProfile(profile);
+        res.status(201).send(result);
+    } catch (err) {
+        res.status(500).send({ message: 'Error creating profile', error: err });
+    }
+});
+
+
+app.get('/profiles', async (req, res) => {
+    try {
+        const profiles = await DAL.getProfile();
+        res.status(200).send(profiles);
+    } catch (err) {
+        res.status(500).send({ message: 'Error fetching profiles', error: err });
+    }
+});
+
+
+app.put('/profiles/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedProfile = req.body;
+        const result = await DAL.updateProfile(id, updatedProfile);
+        if (result.matchedCount === 0) {
+            return res.status(404).send({ message: 'Profile not found' });
+        }
+        res.status(200).send(result);
+    } catch (err) {
+        res.status(500).send({ message: 'Error updating profile', error: err });
+    }
+});
+
+
+app.delete('/profiles/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await DAL.deleteProfile(id);
+        if (result.deletedCount === 0) {
+            return res.status(404).send({ message: 'Profile not found' });
+        }
+        res.status(200).send({ message: 'Profile deleted successfully' });
+    } catch (err) {
+        res.status(500).send({ message: 'Error deleting profile', error: err });
+    }
+});
  
   
 
