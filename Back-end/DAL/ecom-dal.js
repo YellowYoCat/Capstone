@@ -8,25 +8,9 @@ const proCol = 'Profile';
 
 exports.DAL = {
 
-    // getProfile: async function () {
-    //     const client = new MongoClient(url);
-    //     try {
-    //         await client.connect();
-    //         const db = client.db(dbName);
-    //         const result = await db.collection(proCol).find().toArray();
-    //         return result;
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    //     finally {
-    //         await client.close();
-    //     }
 
-
-    // },
-
-     // Create
-     createProfile: async function (profile) {
+    // Create
+    createProfile: async function (profile) {
         const client = new MongoClient(url);
         try {
             await client.connect();
@@ -83,6 +67,52 @@ exports.DAL = {
             return result;
         } catch (err) {
             console.log(err);
+        } finally {
+            await client.close();
+        }
+    },
+
+
+    createUser: async function (fn, ln, usern, email, pass, conPas) {
+        const client = new MongoClient(url);
+        try {
+            await client.connect();
+            const db = client.db(dbName);
+            const newUser = {
+                FirstName: fn,
+                lastName: ln,
+                username: usern,
+                email: email,
+                password: pass,
+                confirmPassword: conPas,
+            }
+
+
+            const result = await db.collection(proCol).insertOne(newUser);
+            return result.insertedId;
+        } catch (err) {
+            console.log(err);
+        } finally {
+            await client.close();
+        }
+
+    },
+
+    // Register
+    register: async function (profile) {
+        const client = new MongoClient(url);
+        try {
+            await client.connect();
+            const db = client.db(dbName);
+            const existingProfile = await db.collection(proCol).findOne({ email: profile.email });
+            if (existingProfile) {
+                throw new Error("Profile with this email already exists");
+            }
+            const result = await db.collection(proCol).insertOne(profile);
+            return result;
+        } catch (err) {
+            console.log(err);
+            throw err; // Rethrow the error so the caller knows something went wrong
         } finally {
             await client.close();
         }

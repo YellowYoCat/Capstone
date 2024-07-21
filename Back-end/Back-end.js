@@ -1,11 +1,13 @@
 
 const express = require('express');
 const { MongoClient } = require('mongodb');
-const { DAL } = require('./DAL/mongo-dal');
-app.use(cors({ "origin": "*" }));
+const { DAL } = require('./DAL/ecom-dal');
 const app = express();
-const port = process.env.PORT || 3000
-require('DB').config();
+const cors = require('cors')
+const port = 3000
+// require('DB').config();
+
+app.use(cors({ "origin": "*" }));
 
 
 const url = "mongodb+srv://Johanna:Jj306879@rest.4gkziko.mongodb.net/?retryWrites=true&w=majority&appName=rest";
@@ -62,6 +64,21 @@ app.delete('/profiles/:id', async (req, res) => {
         res.status(200).send({ message: 'Profile deleted successfully' });
     } catch (err) {
         res.status(500).send({ message: 'Error deleting profile', error: err });
+    }
+});
+
+
+app.post('/register', async (req, res) => {
+    try {
+        const profile = req.body;
+        const result = await DAL.createUser(profile);
+        res.status(201).send(result);
+    } catch (err) {
+        if (err.message === "Profile with this email already exists") {
+            res.status(409).send({ message: err.message });
+        } else {
+            res.status(500).send({ message: 'Error registering profile', error: err });
+        }
     }
 });
  
