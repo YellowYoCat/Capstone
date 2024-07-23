@@ -73,11 +73,13 @@ exports.DAL = {
     },
 
 
-    createUser: async function (fn, ln, usern, email, pass, conPas) {
+    register: async function (fn, ln, usern, email, pass, conPas) {
         const client = new MongoClient(url);
         try {
             await client.connect();
             const db = client.db(dbName);
+            const profile = db.collection(proCol);
+
             const newUser = {
                 FirstName: fn,
                 lastName: ln,
@@ -85,38 +87,20 @@ exports.DAL = {
                 email: email,
                 password: pass,
                 confirmPassword: conPas,
-            }
+            };
 
-
-            const result = await db.collection(proCol).insertOne(newUser);
+            const result = await profile.insertOne(newUser);
             return result.insertedId;
         } catch (err) {
             console.log(err);
         } finally {
             await client.close();
         }
+    }
 
-    },
+    
 
-    // Register
-    register: async function (profile) {
-        const client = new MongoClient(url);
-        try {
-            await client.connect();
-            const db = client.db(dbName);
-            const existingProfile = await db.collection(proCol).findOne({ email: profile.email });
-            if (existingProfile) {
-                throw new Error("Profile with this email already exists");
-            }
-            const result = await db.collection(proCol).insertOne(profile);
-            return result;
-        } catch (err) {
-            console.log(err);
-            throw err; // Rethrow the error so the caller knows something went wrong
-        } finally {
-            await client.close();
-        }
-    },
+    //create an addToCart
 
 
 

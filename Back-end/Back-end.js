@@ -4,11 +4,12 @@ const { MongoClient } = require('mongodb');
 const { DAL } = require('./DAL/ecom-dal');
 const app = express();
 const cors = require('cors')
-const port = 3000
+
+const port = 3001
 // require('DB').config();
 
 app.use(cors({ "origin": "*" }));
-
+app.use(express.json());
 
 const url = "mongodb+srv://Johanna:Jj306879@rest.4gkziko.mongodb.net/?retryWrites=true&w=majority&appName=rest";
 const dbName = 'Ecom';
@@ -68,10 +69,11 @@ app.delete('/profiles/:id', async (req, res) => {
 });
 
 
+ 
 app.post('/register', async (req, res) => {
     try {
-        const profile = req.body;
-        const result = await DAL.createUser(profile);
+        const { fn, ln, usern, email, pass, conPas } = req.body;
+        const result = await DAL.register(fn, ln, usern, email, pass, conPas);
         res.status(201).send(result);
     } catch (err) {
         if (err.message === "Profile with this email already exists") {
@@ -81,8 +83,7 @@ app.post('/register', async (req, res) => {
         }
     }
 });
- 
-  
+
 
 
 app.listen(port, (err) => {

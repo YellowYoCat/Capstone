@@ -21,7 +21,7 @@ const Signup = () => {
     };
 
     const registerUser = async (newUser) => {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('http://localhost:3001/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,6 +46,7 @@ const Signup = () => {
                 password: formData.password,
             };
             const response = await registerUser(newUser);
+            console.log(newUser);
             console.log('User registered:', response);
             alert('Registration successful!'); 
             
