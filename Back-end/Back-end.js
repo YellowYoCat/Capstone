@@ -72,8 +72,8 @@ app.delete('/profiles/:id', async (req, res) => {
  
 app.post('/register', async (req, res) => {
     try {
-        const { fn, ln, usern, email, pass, conPas } = req.body;
-        const result = await DAL.register(fn, ln, usern, email, pass, conPas);
+        const { firstName, lastName, username, email, password, confirmPassword } = req.body;
+        const result = await DAL.register(firstName, lastName, username, email, password, confirmPassword);
         res.status(201).send(result);
     } catch (err) {
         if (err.message === "Profile with this email already exists") {
@@ -81,6 +81,22 @@ app.post('/register', async (req, res) => {
         } else {
             res.status(500).send({ message: 'Error registering profile', error: err });
         }
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await DAL.getUserByUsername(username);
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+        if (user.password !== password) {
+            return res.status(401).send({ message: 'Invalid password' });
+        }
+        res.status(200).send({ message: 'Login successful', user });
+    } catch (err) {
+        res.status(500).send({ message: 'Error logging in', error: err });
     }
 });
 

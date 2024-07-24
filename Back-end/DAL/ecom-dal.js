@@ -10,19 +10,20 @@ exports.DAL = {
 
 
     // Create
-    createProfile: async function (profile) {
-        const client = new MongoClient(url);
-        try {
-            await client.connect();
-            const db = client.db(dbName);
-            const result = await db.collection(proCol).insertOne(profile);
-            return result;
-        } catch (err) {
-            console.log(err);
-        } finally {
-            await client.close();
-        }
-    },
+    // createProfile: async function (profile) {
+    //     const client = new MongoClient(url);
+    //     try {
+    //         await client.connect();
+    //         const db = client.db(dbName);
+    //         const result = await db.collection(proCol).insertOne(profile);
+    //         return result;
+    //     } catch (err) {
+    //         console.log(err);
+    //     } finally {
+    //         await client.close();
+    //     }
+    // },
+    //I don't know if I really need this 
 
     // Read
     getProfile: async function () {
@@ -73,24 +74,51 @@ exports.DAL = {
     },
 
 
-    register: async function (fn, ln, usern, email, pass, conPas) {
+    register: async function (firstName, lastName, username, email, password, confirmPassword) {
         const client = new MongoClient(url);
         try {
+            console.log("Received parameters:", {
+                firstName,
+                lastName,
+                username,
+                email,
+                password,
+                confirmPassword
+            });
             await client.connect();
             const db = client.db(dbName);
             const profile = db.collection(proCol);
 
             const newUser = {
-                FirstName: fn,
-                lastName: ln,
-                username: usern,
+                firstName: firstName,
+                lastName: lastName,
+                username: username,
                 email: email,
-                password: pass,
-                confirmPassword: conPas,
+                password: password,
+                confirmPassword: confirmPassword,
             };
 
+            console.log("New User Object:", newUser);
+
             const result = await profile.insertOne(newUser);
+            
+            console.log("Insert Result:", result);
+
             return result.insertedId;
+        } catch (err) {
+            console.log(err);
+        } finally {
+            await client.close();
+        }
+    },
+
+    getUserByUsername: async function (username) {
+        const client = new MongoClient(url);
+        try {
+            await client.connect();
+            const db = client.db(dbName);
+            const user = await db.collection(proCol).findOne({ username: username });
+            return user;
         } catch (err) {
             console.log(err);
         } finally {
