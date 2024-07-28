@@ -12,7 +12,7 @@ const Login = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['username']);
 
     useEffect(() => {
-        // Check if the user is already logged in
+        
         if (cookies.username) {
             navigate('/profile');
         }
@@ -21,14 +21,14 @@ const Login = () => {
     useEffect(() => {
         let timer;
         if (cookies.username) {
-            // Set a timer for auto-logout after 7 minutes (7 * 60 * 1000 milliseconds)
+            
             timer = setTimeout(() => {
                 removeCookie('username', { path: '/' });
                 navigate('/login');
             }, 5 * 60 * 1000);
         }
 
-        // Clear the timer when the component unmounts or username changes
+       
         return () => {
             if (timer) {
                 clearTimeout(timer);
