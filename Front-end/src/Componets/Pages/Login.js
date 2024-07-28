@@ -1,13 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Nav/Navbar';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies(['username']);
+
+    useEffect(() => {
+        // Check if the user is already logged in
+        if (cookies.username) {
+            navigate('/profile');
+        }
+    }, [cookies, navigate]);
+
+    useEffect(() => {
+        let timer;
+        if (cookies.username) {
+            // Set a timer for auto-logout after 7 minutes (7 * 60 * 1000 milliseconds)
+            timer = setTimeout(() => {
+                removeCookie('username', { path: '/' });
+                navigate('/login');
+            }, 5 * 60 * 1000);
+        }
+
+        // Clear the timer when the component unmounts or username changes
+        return () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
+        };
+    }, [cookies.username, removeCookie, navigate]);
+
+
+    // if (cookies.username) {
+    //     navigate('/profile');
+    // }
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,7 +60,7 @@ const Login = () => {
 
             if (response.ok) {
                 console.log('Login successful', data);
-                
+                setCookie('username', username, { path: '/', expires: new Date(Date.now() + 7 * 60 * 1000) });
                 navigate('/profile'); 
             } else {
                 setError(data.message || 'Error logging in');

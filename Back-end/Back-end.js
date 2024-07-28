@@ -30,10 +30,24 @@ app.post('/profiles', async (req, res) => {
 });
 
 
+// app.get('/profiles', async (req, res) => {
+//     try {
+//         const profiles = await DAL.getProfile();
+//         res.status(200).send(profiles);
+//     } catch (err) {
+//         res.status(500).send({ message: 'Error fetching profiles', error: err });
+//     }
+// });
+
 app.get('/profiles', async (req, res) => {
+    const pro = await DAL.getAllProfiles();
+    res.json(pro);
+})
+
+app.get('/profiles/id', async (req, res) => {
     try {
-        const profiles = await DAL.getProfile();
-        res.status(200).send(profiles);
+        const profile = await DAL.getProfileById(req.params.id);
+        res.status(200).send(profile);
     } catch (err) {
         res.status(500).send({ message: 'Error fetching profiles', error: err });
     }

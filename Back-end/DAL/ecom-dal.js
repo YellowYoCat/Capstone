@@ -25,13 +25,37 @@ exports.DAL = {
     // },
     //I don't know if I really need this 
 
-    // Read
-    getProfile: async function () {
+
+    getAllProfiles: async function () {
         const client = new MongoClient(url);
         try {
             await client.connect();
             const db = client.db(dbName);
-            const result = await db.collection(proCol).find().toArray();
+            
+            const results = await db.collection(proCol).find().toArray();
+            return results;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        } finally {
+            await client.close();
+        }
+    },
+
+
+    // get
+    getProfileById: async function (id) {
+        const client = new MongoClient(url);
+        try {
+            await client.connect();
+            const db = client.db(dbName);
+
+            const query = {
+                _id: ObjectId.createFromHexString(id),
+
+        };
+
+            const result = await db.collection(proCol).findOne(query);
             return result;
         } catch (err) {
             console.log(err);

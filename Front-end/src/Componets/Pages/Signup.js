@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './Nav/Navbar';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 
 const Signup = () => {
@@ -11,6 +12,8 @@ const Signup = () => {
         password: '',
         confirmPassword: '',
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,6 +52,7 @@ const Signup = () => {
             console.log(newUser);
             console.log('User registered:', response);
             alert('Registration successful!'); 
+            navigate('/login');
             
         } catch (error) {
             console.error('Error registering user:', error);
