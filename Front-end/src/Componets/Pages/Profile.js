@@ -5,9 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const Profile = () => {
 
-  const [profiles, setProfiles] = useState([]);
+  const [profile, setProfile] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Profile = () => {
 
 
   useEffect(() => {
-    const url = `http://localhost:3001/profiles/${id}`;
+    const url = `http://localhost:3001/profiles/${id}`; //${cookies.username}
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -31,7 +31,7 @@ const Profile = () => {
         setError(error);
       });
 
-  }, [id])
+  }, [cookies, navigate])
 
 
   const handleLogout = () => {
@@ -40,7 +40,7 @@ const Profile = () => {
   };
 
   if (!cookies.username) {
-    return null; 
+    return null;
   }
 
 
@@ -60,16 +60,20 @@ const Profile = () => {
           </>
         )}
       </div>
-      <ul>
-        {profiles.map(profile => (
+      <div>
+
+        <ul>
           <li key={profile._id}>
             <p>First Name: {profile.firstName}</p>
             <p>Last Name: {profile.lastName}</p>
             <p>Username: {profile.username}</p>
             <p>Email: {profile.email}</p>
           </li>
-        ))}
-      </ul>
+        </ul>
+
+
+      </div>
+
     </div>
 
   )

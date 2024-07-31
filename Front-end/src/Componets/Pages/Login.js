@@ -37,10 +37,6 @@ const Login = () => {
     }, [cookies.username, removeCookie, navigate]);
 
 
-    // if (cookies.username) {
-    //     navigate('/profile');
-    // }
-
 
     const handleLogin = async (e) => {
         e.preventDefault();

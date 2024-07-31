@@ -4,12 +4,14 @@ const { MongoClient } = require('mongodb');
 const { DAL } = require('./DAL/ecom-dal');
 const app = express();
 const cors = require('cors')
+const bodyParser = require('body-parser');
+
 
 const port = 3001
-// require('DB').config();
 
 app.use(cors({ "origin": "*" }));
 app.use(express.json());
+app.use(express.urlencoded({extended: true})); 
 
 const url = "mongodb+srv://Johanna:Jj306879@rest.4gkziko.mongodb.net/?retryWrites=true&w=majority&appName=rest";
 const dbName = 'Ecom';
@@ -30,21 +32,14 @@ app.post('/profiles', async (req, res) => {
 });
 
 
-// app.get('/profiles', async (req, res) => {
-//     try {
-//         const profiles = await DAL.getProfile();
-//         res.status(200).send(profiles);
-//     } catch (err) {
-//         res.status(500).send({ message: 'Error fetching profiles', error: err });
-//     }
-// });
-
 app.get('/profiles', async (req, res) => {
     const pro = await DAL.getAllProfiles();
     res.json(pro);
 })
 
-app.get('/profiles/id', async (req, res) => {
+  
+
+app.get('/profiles/:id', async (req, res) => {
     try {
         const profile = await DAL.getProfileById(req.params.id);
         res.status(200).send(profile);
@@ -54,7 +49,9 @@ app.get('/profiles/id', async (req, res) => {
 });
 
 
-app.put('/profiles/:id', async (req, res) => {
+
+
+app.put('/update', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedProfile = req.body;
@@ -69,7 +66,7 @@ app.put('/profiles/:id', async (req, res) => {
 });
 
 
-app.delete('/profiles/:id', async (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const result = await DAL.deleteProfile(id);

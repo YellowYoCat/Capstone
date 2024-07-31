@@ -31,7 +31,7 @@ exports.DAL = {
         try {
             await client.connect();
             const db = client.db(dbName);
-            
+
             const results = await db.collection(proCol).find().toArray();
             return results;
         } catch (err) {
@@ -49,16 +49,14 @@ exports.DAL = {
         try {
             await client.connect();
             const db = client.db(dbName);
+            const pro = await db.collection(proCol)
 
             const query = {
                 _id: ObjectId.createFromHexString(id),
+            };
 
-        };
-
-            const result = await db.collection(proCol).findOne(query);
+            const result = await pro.findOne(query);
             return result;
-        } catch (err) {
-            console.log(err);
         } finally {
             await client.close();
         }
@@ -125,7 +123,7 @@ exports.DAL = {
             console.log("New User Object:", newUser);
 
             const result = await profile.insertOne(newUser);
-            
+
             console.log("Insert Result:", result);
 
             return result.insertedId;
@@ -149,8 +147,9 @@ exports.DAL = {
             await client.close();
         }
     }
-
     
+
+
 
     //create an addToCart
 
