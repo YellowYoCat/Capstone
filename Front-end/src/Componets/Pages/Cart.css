@@ -18,7 +18,7 @@
   .btn {
     font-family: "Fuzzy Bubbles", sans-serif;
     display: flex;
-    margin-left: 1500px;
+    /* margin-left: 500px; */
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #A663CC;

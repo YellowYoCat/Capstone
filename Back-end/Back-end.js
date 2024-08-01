@@ -13,8 +13,7 @@ app.use(cors({ "origin": "*" }));
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); 
 
-const url = "mongodb+srv://Johanna:Jj306879@rest.4gkziko.mongodb.net/?retryWrites=true&w=majority&appName=rest";
-const dbName = 'Ecom';
+
 
 app.get('/', (req, res) => {
     res.send("you hit my route")
@@ -110,6 +109,30 @@ app.post('/login', async (req, res) => {
         res.status(500).send({ message: 'Error logging in', error: err });
     }
 });
+
+app.get('/products', async (req, res) => {
+    const pro = await DAL.getData();
+    res.json(pro);
+});
+
+
+app.get('/products/:dataId', async (req, res) => {
+    const id = parseInt(req.params.dataId); // Ensure id is parsed as integer if that's how it's stored
+    try {
+        const pro = await DAL.getDataById(id);
+        if (!pro) {
+            return res.status(404).send({ message: 'Product not found' });
+        }
+        res.json(pro);
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        res.status(500).send({ message: 'Internal Server Error' });
+    }
+});
+
+
+
+
 
 
 

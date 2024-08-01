@@ -9,7 +9,7 @@ const ProductList = ({productData, productClicked}) => {
     useEffect(() => {
       const fetchProducts = async () => {
         try {
-          const response = await fetch('https://fakestoreapi.com/products');
+          const response = await fetch('http://localhost:3001/products'); //  https://fakestoreapi.com/products
           const data = await response.json();
           setProducts(data);
           setLoading(false);
