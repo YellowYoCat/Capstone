@@ -117,7 +117,7 @@ app.get('/products', async (req, res) => {
 
 
 app.get('/products/:dataId', async (req, res) => {
-    const id = parseInt(req.params.dataId); // Ensure id is parsed as integer if that's how it's stored
+    const id = parseInt(req.params.dataId); 
     try {
         const pro = await DAL.getDataById(id);
         if (!pro) {
