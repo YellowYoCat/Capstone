@@ -5,6 +5,7 @@ const dbName = 'Ecom';
 const dataCol = 'Data';
 const comCol = 'Comment';
 const proCol = 'Profile';
+const carCol = 'Card';
 
 exports.DAL = {
 
@@ -169,7 +170,55 @@ exports.DAL = {
         await client.close();
     }
     
-}
+},
+
+    checkout: async function(firstName, lastName, street, city, state, zip, country, card, mmyy, cvc, zip2){
+        const client = new MongoClient(url);
+        try {
+            console.log("Received parameters:", {
+                firstName,
+                lastName,
+                street,
+                city,
+                state,
+                zip,
+                country, 
+                card,
+                mmyy, 
+                cvc,
+                zip2,
+            });
+            await client.connect();
+            const db = client.db(dbName);
+            const profile = db.collection(carCol);
+
+            const userData = {
+                firstName: firstName,
+                lastName: lastName,
+                street: street,
+                city: city,
+                state: state,
+                zip: zip,
+                country: country, 
+                card: card,
+                mmyy: mmyy, 
+                cvc : cvc,
+                zip2: zip2,
+            };
+
+            console.log("New User Object:", userData);
+
+            const result = await profile.insertOne(userData);
+
+            console.log("Insert Result:", result);
+
+            return result.insertedId;
+        } catch (err) {
+            console.log(err);
+        } finally {
+            await client.close();
+        }
+    }
    
 
 

@@ -10,10 +10,10 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    
+
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCart(savedCart);
-  
+
     const cartTotal = savedCart.reduce((acc, item) => acc + item.price, 0);
     setTotal(cartTotal);
   }, []);
@@ -36,11 +36,13 @@ const Cart = () => {
         <div>Cart is empty</div>
       ) : (
         cart.map((item, index) => (
-          <div key={index}>
+          <div className="cart-item" key={index}>
             <img src={item.image} alt={item.title} />
-            <p>{item.title}</p>
-            <p><strong>${item.price}</strong></p>
-            <button className="remove-btn" onClick={() => removeFromCart(item)}>Remove</button>
+            <div className="cart-item-content">
+              <p>{item.title}</p>
+              <p><strong>${item.price}</strong></p>
+              <button className="remove-btn" onClick={() => removeFromCart(item)}>Remove</button>
+            </div>
           </div>
         ))
       )}

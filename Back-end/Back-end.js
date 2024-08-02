@@ -132,6 +132,22 @@ app.get('/products/:dataId', async (req, res) => {
 
 
 
+app.post('/card', async (req, res) => {
+    try {
+        const { firstName, lastName, street, city, state, zip, country, card, mmyy, cvc, zip2 } = req.body;
+        const result = await DAL.checkout(firstName, lastName, street, city, state, zip, country, card, mmyy, cvc, zip2 );
+        res.status(201).send(result);
+    } catch (err) {
+        if (err.message === "Profile with this email already exists") {
+            res.status(409).send({ message: err.message });
+        } else {
+            res.status(500).send({ message: 'Error registering profile', error: err });
+        }
+    }
+});
+
+
+
 
 
 
