@@ -138,13 +138,29 @@ app.post('/card', async (req, res) => {
         const result = await DAL.checkout(firstName, lastName, street, city, state, zip, country, card, mmyy, cvc, zip2 );
         res.status(201).send(result);
     } catch (err) {
-        if (err.message === "Profile with this email already exists") {
+        if (err.message === "Profile with this card already exists") {
             res.status(409).send({ message: err.message });
         } else {
-            res.status(500).send({ message: 'Error registering profile', error: err });
+            res.status(500).send({ message: 'Error registering card', error: err });
         }
     }
 });
+
+
+app.post('/contact', async (req, res) => {
+    try {
+        const { name, email, phone, comment } = req.body;
+        const result = await DAL.contact(name, email, phone, comment);
+        res.status(201).send(result);
+    } catch (err) {
+        if (err.message === "oops something went wrong") {
+            res.status(409).send({ message: err.message });
+        } else {
+            res.status(500).send({ message: 'error', error: err });
+        }
+    }
+});
+
 
 
 

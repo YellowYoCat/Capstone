@@ -218,7 +218,42 @@ exports.DAL = {
         } finally {
             await client.close();
         }
-    }
+    },
+
+    contact: async function (name, email, phone, comment){
+        const client = new MongoClient(url);
+        try {
+            console.log("Received parameters:", {
+                name,
+                email,
+                phone,
+                comment
+            });
+            await client.connect();
+            const db = client.db(dbName);
+            const profile = db.collection(comCol);
+
+            const newCom = {
+                name: name,
+                email: email,
+                phone: phone,
+                comment: comment
+            };
+
+            console.log("New:", newCom);
+
+            const result = await profile.insertOne(newCom);
+
+            console.log("Insert Result:", result);
+
+            return result.insertedId;
+        } catch (err) {
+            console.log(err);
+        } finally {
+            await client.close();
+        }
+
+    },
    
 
 

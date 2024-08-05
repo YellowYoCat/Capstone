@@ -39,7 +39,7 @@ const Checkout = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const registerUser = async (newUser) => {
+  const card = async (newUser) => {
     const response = await fetch('http://localhost:3001/card', {
       method: 'POST',
       headers: {
@@ -58,7 +58,7 @@ const Checkout = () => {
       const userData = {
         ...formData,
       };
-      const response = await registerUser(userData);
+      const response = await card(userData);
       console.log(userData);
       console.log('Info saved:', response);
       alert('Information successfully saved!');
