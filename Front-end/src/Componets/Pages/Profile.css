@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap');
+
+.fuzzy-bubbles-bold {
+  font-family: "Fuzzy Bubbles", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+.profile-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #A663CC;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px #6F2DBD;
+  text-align: center;
+  flex-direction: column;
+}
+
+.profile-header {
+  font-weight: 700;
+  font-size: 70px;
+  font-style: normal;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.wel{
+  font-size: 55px;
+  color: #6F2DBD;
+  -webkit-text-stroke: 1px black;
+  margin: 10px 0;
+ ;
+}
+
+.text {
+  font-size: 19px;
+  color: #6F2DBD;
+  margin: 10px 0;
+}
+
+.or {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list {
+  background-color: #B9FAF8;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px #6F2DBD;
+}
+
+.info {
+  background-color: #B8D0EB;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px #6F2DBD;
+  margin-top: 20px;
+
+
+}
+
+.btns {
+  display: flex;
+  justify-content: center; 
+  gap: 10px; 
+  margin-top: 20px;
+}
+
+.btns button {
+  background-color: #6F2DBD; 
+  color: #B9FAF8; 
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.btns button:hover {
+  background-color: #B298DC; 
+  transform: scale(1.05); 
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .header {
+    font-size: 32px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

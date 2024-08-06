@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Nav/Navbar';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
+import './Profile.css';
 
 const Profile = () => {
 
@@ -11,7 +12,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { username } = useParams();
 
   useEffect(() => {
     if (!cookies.username) {
@@ -21,17 +22,23 @@ const Profile = () => {
 
 
   useEffect(() => {
-    const url = `http://localhost:3001/profiles/${id}`; //${cookies.username}
+    const url = `http://localhost:3001/users/${cookies.username}`;
     fetch(url)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
-        setUserData(data);
+        setProfile(data);
+        setLoading(false);
       })
       .catch(error => {
         setError(error);
+        setLoading(false);
       });
-
-  }, [cookies, navigate])
+  }, [cookies.username]);
 
 
   const handleLogout = () => {
@@ -51,29 +58,38 @@ const Profile = () => {
       <div>
         <Navbar />
       </div>
-      <div>
-        <h1>Profile</h1>
+      <h1 className='profile-header fuzzy-bubbles-bold'>Profile</h1>
+      <div className='profile-container'>
+
         {cookies.username && (
           <>
-            <p>Welcome, {cookies.username}!</p>
-            <button onClick={handleLogout}>Logout</button>
+            <p className='wel'>Welcome, {cookies.username}!</p>
+
           </>
         )}
+
+        <div className='info'>
+
+          <ul className='or'>
+            <li className='list' key={profile._id}>
+              <p className='text'>First Name: {profile.firstName}</p>
+              <p className='text'>Last Name: {profile.lastName}</p>
+              <p className='text'>Username: {profile.username}</p>
+              <p className='text'>Email: {profile.email}</p>
+            </li>
+          </ul>
+
+
+        </div>
+        <div className='btns'>
+          <button>Edit</button>
+          <button>Delete</button>
+          <button onClick={handleLogout}>Logout</button>
+
+        </div>
+
+
       </div>
-      <div>
-
-        <ul>
-          <li key={profile._id}>
-            <p>First Name: {profile.firstName}</p>
-            <p>Last Name: {profile.lastName}</p>
-            <p>Username: {profile.username}</p>
-            <p>Email: {profile.email}</p>
-          </li>
-        </ul>
-
-
-      </div>
-
     </div>
 
   )

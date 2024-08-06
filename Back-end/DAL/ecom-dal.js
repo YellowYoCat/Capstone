@@ -132,6 +132,21 @@ exports.DAL = {
         }
     }, 
 
+    getUserDataByUsername: async function (username) {
+        const client = new MongoClient(url);
+        try {
+          await client.connect();
+          const db = client.db(dbName);
+          const userData = await db.collection(proCol).findOne({ username: username });
+          return userData;
+        } catch (err) {
+          console.log(err);
+        } finally {
+          await client.close();
+        }
+      },
+
+
    getData: async function () {
     const client = new MongoClient(url);
         try {

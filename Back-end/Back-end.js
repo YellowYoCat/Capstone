@@ -11,15 +11,15 @@ const port = 3001
 
 app.use(cors({ "origin": "*" }));
 app.use(express.json());
-app.use(express.urlencoded({extended: true})); 
+app.use(express.urlencoded({ extended: true }));
 
 
 
 app.get('/', (req, res) => {
     res.send("you hit my route")
-  })
+})
 
-  
+
 app.post('/profiles', async (req, res) => {
     try {
         const profile = req.body;
@@ -36,7 +36,7 @@ app.get('/profiles', async (req, res) => {
     res.json(pro);
 })
 
-  
+
 
 app.get('/profiles/:id', async (req, res) => {
     try {
@@ -45,6 +45,8 @@ app.get('/profiles/:id', async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: 'Error fetching profiles', error: err });
     }
+
+   
 });
 
 
@@ -79,7 +81,7 @@ app.delete('/delete/:id', async (req, res) => {
 });
 
 
- 
+
 app.post('/register', async (req, res) => {
     try {
         const { firstName, lastName, username, email, password, confirmPassword } = req.body;
@@ -117,7 +119,7 @@ app.get('/products', async (req, res) => {
 
 
 app.get('/products/:dataId', async (req, res) => {
-    const id = parseInt(req.params.dataId); 
+    const id = parseInt(req.params.dataId);
     try {
         const pro = await DAL.getDataById(id);
         if (!pro) {
@@ -135,7 +137,7 @@ app.get('/products/:dataId', async (req, res) => {
 app.post('/card', async (req, res) => {
     try {
         const { firstName, lastName, street, city, state, zip, country, card, mmyy, cvc, zip2 } = req.body;
-        const result = await DAL.checkout(firstName, lastName, street, city, state, zip, country, card, mmyy, cvc, zip2 );
+        const result = await DAL.checkout(firstName, lastName, street, city, state, zip, country, card, mmyy, cvc, zip2);
         res.status(201).send(result);
     } catch (err) {
         if (err.message === "Profile with this card already exists") {
@@ -162,6 +164,22 @@ app.post('/contact', async (req, res) => {
 });
 
 
+app.get('/users/:username', async (req, res) => {
+    try {
+        const username = req.params.username;
+        const userData = await DAL.getUserDataByUsername(username);
+        if (!userData) {
+            res.status(404).send({ message: 'User not found' });
+        } else {
+            res.send(userData);
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ message: 'Error retrieving user data' });
+    }
+});
+
+
 
 
 
@@ -171,5 +189,4 @@ app.post('/contact', async (req, res) => {
 app.listen(port, (err) => {
     if (err) console.log(err);
     console.log(`Express is listening on ${port}`)
-  });
-  
+});
