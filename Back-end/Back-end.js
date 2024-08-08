@@ -38,50 +38,6 @@ app.get('/profiles', async (req, res) => {
 
 
 
-app.get('/profiles/:id', async (req, res) => {
-    try {
-        const profile = await DAL.getProfileById(req.params.id);
-        res.status(200).send(profile);
-    } catch (err) {
-        res.status(500).send({ message: 'Error fetching profiles', error: err });
-    }
-
-   
-});
-
-
-
-
-app.put('/update', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const updatedProfile = req.body;
-        const result = await DAL.updateProfile(id, updatedProfile);
-        if (result.matchedCount === 0) {
-            return res.status(404).send({ message: 'Profile not found' });
-        }
-        res.status(200).send(result);
-    } catch (err) {
-        res.status(500).send({ message: 'Error updating profile', error: err });
-    }
-});
-
-
-app.delete('/delete/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const result = await DAL.deleteProfile(id);
-        if (result.deletedCount === 0) {
-            return res.status(404).send({ message: 'Profile not found' });
-        }
-        res.status(200).send({ message: 'Profile deleted successfully' });
-    } catch (err) {
-        res.status(500).send({ message: 'Error deleting profile', error: err });
-    }
-});
-
-
-
 app.post('/register', async (req, res) => {
     try {
         const { firstName, lastName, username, email, password, confirmPassword } = req.body;
@@ -170,14 +126,41 @@ app.get('/users/:username', async (req, res) => {
         const userData = await DAL.getUserDataByUsername(username);
         if (!userData) {
             res.status(404).send({ message: 'User not found' });
-        } else {
-            res.send(userData);
         }
+        return res.json(userData);
     } catch (err) {
         console.error(err);
         res.status(500).send({ message: 'Error retrieving user data' });
     }
 });
+
+app.patch('/users/:username', async (req, res) => {
+    try {
+        const username = req.params.username;
+        const updatedProfile = req.body;
+        const result = await DAL.updateUserDataByUsername(username, updatedProfile);
+        res.send(result);
+        res.json({ message: 'Update successful!' });
+    } catch (error) {
+        res.status(500).json({ error: 'Update failed.' });
+    }
+});
+
+app.delete('/users/:username', async (req, res) => {
+    try {
+        const username = req.params.username;
+        const result = await DAL.deleteUserByUsername(username);
+        if (result.deletedCount === 1) {
+            res.status(200).send({ message: `User ${username} deleted successfully` });
+        } else {
+            res.status(404).send({ message: `User ${username} not found` });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: 'Internal Server Error' });
+    }
+});
+
 
 
 

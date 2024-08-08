@@ -27,59 +27,6 @@ exports.DAL = {
     },
 
 
-    // get
-    getProfileById: async function (id) {
-        const client = new MongoClient(url);
-        try {
-            await client.connect();
-            const db = client.db(dbName);
-            const pro = await db.collection(proCol)
-
-            const query = {
-                _id: ObjectId.createFromHexString(id),
-            };
-
-            const result = await pro.findOne(query);
-            return result;
-        } finally {
-            await client.close();
-        }
-    },
-
-    // Update
-    updateProfile: async function (id, updatedProfile) {
-        const client = new MongoClient(url);
-        try {
-            await client.connect();
-            const db = client.db(dbName);
-            const result = await db.collection(proCol).updateOne(
-                { _id: new ObjectId(id) },
-                { $set: updatedProfile }
-            );
-            return result;
-        } catch (err) {
-            console.log(err);
-        } finally {
-            await client.close();
-        }
-    },
-
-    // Delete
-    deleteProfile: async function (id) {
-        const client = new MongoClient(url);
-        try {
-            await client.connect();
-            const db = client.db(dbName);
-            const result = await db.collection(proCol).deleteOne({ _id: new ObjectId(id) });
-            return result;
-        } catch (err) {
-            console.log(err);
-        } finally {
-            await client.close();
-        }
-    },
-
-
     register: async function (firstName, lastName, username, email, password, confirmPassword) {
         const client = new MongoClient(url);
         try {
@@ -147,6 +94,21 @@ exports.DAL = {
       },
 
 
+      updateUserDataByUsername: async function (username, updates) {
+        const client = new MongoClient(url);
+        try {
+          await client.connect();
+          const db = client.db(dbName);
+          const result = await db.collection(proCol).updateOne({ username: username }, { $set: updates });
+          return result;
+        } catch (err) {
+          console.log(err);
+        } finally {
+          await client.close();
+        }
+      },
+
+
    getData: async function () {
     const client = new MongoClient(url);
         try {
@@ -162,6 +124,20 @@ exports.DAL = {
             await client.close();
         }
    },
+
+   deleteUserByUsername: async function (username) {
+    const client = new MongoClient(url);
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const result = await db.collection(proCol).deleteOne({ username: username });
+        return result;
+    } catch (err) {
+        console.log(err);
+    } finally {
+        await client.close();
+    }
+},
 
    
 

@@ -25,7 +25,7 @@ const Login = () => {
             timer = setTimeout(() => {
                 removeCookie('username', { path: '/' });
                 navigate('/login');
-            }, 5 * 60 * 1000);
+            }, 5 * 60 * 1000); 
         }
 
        
@@ -56,7 +56,7 @@ const Login = () => {
 
             if (response.ok) {
                 console.log('Login successful', data);
-                setCookie('username', username, { path: '/', expires: new Date(Date.now() + 7 * 60 * 1000) });
+                setCookie('username', username, { path: '/', expires: new Date(Date.now() + 30 * 60 * 1000) });
                 navigate('/profile'); 
             } else {
                 setError(data.message || 'Error logging in');

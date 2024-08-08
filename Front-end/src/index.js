@@ -13,6 +13,7 @@ import Social from './Componets/Pages/Social';
 import Login from './Componets/Pages/Login';
 import Signup from './Componets/Pages/Signup';
 import Checkout from './Componets/Pages/Checkout';
+import Edit from './Componets/Pages/Edit';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([{
 {
   path: '/checkout',
   element: <Checkout/>
+},
+{
+  path: '/edit',
+  element: <Edit />
 }
 
 ])

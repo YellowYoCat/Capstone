@@ -20,30 +20,57 @@ const Profile = () => {
     }
   }, [cookies, navigate]);
 
-
   useEffect(() => {
-    const url = `http://localhost:3001/users/${cookies.username}`;
-    fetch(url)
-      .then(response => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/users/${cookies.username}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
-      })
-      .then(data => {
+
+        const data = await response.json();
         setProfile(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
         setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchProfile();
   }, [cookies.username]);
 
 
   const handleLogout = () => {
     removeCookie('username', { path: '/' });
     navigate('/login');
+  };
+
+  const handleEdit = () => {
+    navigate('/edit');
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/users/${cookies.username}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        alert('User deleted successfully!');
+        navigate('/'); // redirect to home page
+      } else {
+        throw new Error('Error deleting user');
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      alert('Error deleting user. Please try again.');
+    }
   };
 
   if (!cookies.username) {
@@ -82,8 +109,8 @@ const Profile = () => {
 
         </div>
         <div className='btns'>
-          <button>Edit</button>
-          <button>Delete</button>
+          <button onClick={handleEdit}>Edit</button>
+          <button onClick={handleDelete}>Delete</button>
           <button onClick={handleLogout}>Logout</button>
 
         </div>
