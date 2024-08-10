@@ -139,8 +139,8 @@ app.patch('/users/:username', async (req, res) => {
         const username = req.params.username;
         const updatedProfile = req.body;
         const result = await DAL.updateUserDataByUsername(username, updatedProfile);
-        res.send(result);
-        res.json({ message: 'Update successful!' });
+        res.json(result);
+        // res.json({ message: 'Update successful!' });
     } catch (error) {
         res.status(500).json({ error: 'Update failed.' });
     }

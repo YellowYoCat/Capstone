@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from './Nav/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,7 +9,7 @@ const Edit = () => {
   const [profile, setProfile] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [cookies, setCookie, removeCookie] = useCookies(['username']);
   const { username } = useParams();
   const navigate = useNavigate();
 
@@ -29,30 +30,45 @@ const Edit = () => {
 
   const updateUser = async (newUser) => {
     const response = await fetch('http://localhost:3001/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newUser),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
     });
     return response.json();
-};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
+
+      
+      const isUsernameChanged = formData.username !== cookies.username;
+
       const response = await fetch(`http://localhost:3001/users/${cookies.username}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      const data = await updateUser();
+
+      const data = await updateUser(formData);
+
       if (response.ok) {
         setProfile(data);
         setLoading(false);
         alert('Update successful!');
-        navigate('/profile'); 
+
+       
+        if (isUsernameChanged) {
+          removeCookie('username', { path: '/' });
+          alert('Username changed. You have been logged out. Please log in with your new username.');
+          navigate('/login'); 
+        } else {
+          navigate('/profile');
+        }
+        
       } else {
         throw new Error(data.error || 'Update failed');
       }
