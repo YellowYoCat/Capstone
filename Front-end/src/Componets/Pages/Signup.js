@@ -31,7 +31,7 @@ const Signup = () => {
             },
             body: JSON.stringify(newUser),
         });
-        return response.json();
+        // return response.json();
     };
 
     const handleSubmit = async (e) => {
