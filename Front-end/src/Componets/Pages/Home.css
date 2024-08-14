@@ -24,15 +24,15 @@
 
 .Banner img {
   width: 100%;
-  max-width: 1700px;
+  max-width: 1500px;
   height: inherit;
   border-radius: 55px;
   border: 5px solid #6F2DBD;
 }
 
-.Dokimerch {
+.fakestore {
   font-family: "Poetsen One", sans-serif;
-  font-size: 55px;
+  font-size: 175px;
   padding-top: 20px;
   position: absolute;
   justify-content: center;
@@ -62,7 +62,7 @@
     padding-right: 20px;
   }
 
-  .Dokimerch {
+  .fakestore {
     font-size: 45px;
     padding-top: 15px;
   }
@@ -83,7 +83,7 @@
     padding-right: 10px;
   }
 
-  .Dokimerch {
+  .fakestore {
     font-size: 35px;
     padding-top: 10px;
   }

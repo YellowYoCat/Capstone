@@ -9,21 +9,17 @@ const Home = () => {
         <Navbar />
       </div>
       <div className='Banner'>
-        <img src='banner.png' />
-        <div className="Dokimerch">
-          DOKIMERCH
+        <img src='fakestore.png' />
+        <div className="fakestore">
+          FAKESTORE
         </div>
       </div>
       <div className='call'>
         <h4 className='cta'>
-          Discover exclusive Dokibird merch that
-          brings your favorite moments to life!
-          From adorable plushies to stylish apparel,
-          each item is crafted with love and creativity.
-          Dive into the Dokibird universe and
-          find something special to cherish.
-          Shop now and make every day
-          more magical with Dokibird!
+        Discover exclusive apparel that adds style and comfort to your everyday look. 
+        From trendy tees to cozy hoodies, each piece is crafted with quality and flair. 
+        Dive into our clothing collection and find something special to refresh your wardrobe. 
+        Shop now and make every outfit stand out with Fake Store!
         </h4>
       </div>
 
