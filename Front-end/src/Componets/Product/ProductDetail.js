@@ -20,7 +20,7 @@ const ProductDetail = ({ product, closeClicked }) => {
       const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
 
      
-      const productInCart = existingCart.find(item => item.id === product.id);
+      const productInCart = existingCart.find(item => item.dataId === product.dataId);
 
       if (productInCart) {
         
